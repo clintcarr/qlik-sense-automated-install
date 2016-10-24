@@ -51,8 +51,6 @@ Write-Host "Installing Qlik Sense Enterprise"
 Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-write-host "Wait 60 seconds for Qlik Sense to initialise"
-
 #Code by Leigh Kennedy
 write-host "Connecting to Qlik Sense Proxy"
 $statusCode = 0
