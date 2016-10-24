@@ -59,7 +59,7 @@ $statusCode = 0
 while ($StatusCode -ne 200) {
   write-host "StatusCode is " $StatusCode
   start-Sleep -s 5
-  try { $statusCode = (invoke-webrequest  http://$hostname/qps/user).statusCode }
+  try { $statusCode = (invoke-webrequest  https://$hostname/qps/user).statusCode }
 Catch { 
     write-host "Server down, waiting 5 seconds"
     start-Sleep -s 5
