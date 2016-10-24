@@ -9,6 +9,9 @@ This script installs Qlik Sense 3.1.1 with the following:
 
 Utilises Qlik-CLI (https://github.com/ahaydon/Qlik-Cli) to perform license step.
 
+## User Account
+Note: Does not create the service account, please create within Domain or Local system before running.
+
 ## Usage
 install-qs.ps1 -serial '' -control '' -name '' -organization '' -serviceAccount '' -serviceAccount2 '' -serviceAccountPass '' -PostgresAccountPass '' -hostname ''
 
