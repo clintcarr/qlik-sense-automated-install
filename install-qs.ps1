@@ -3,18 +3,18 @@
 # Date: 24 October 2016
 # Note: Requires .NET Framework 4.5.2 or higher to use
 
-#----------------------------------
-# Variables
-#----------------------------------
-
-$serial = ''
-$control = ''
-$name = ''
-$organization = ''
-$serviceAccount = 'user@domain.domain'
-$serviceAccountPass = '' 
-$PostgresAccountPass = ''
-$hostname = 'FQDN'
+# usage install-qs.ps1 -serial '' -control '' -name '' -organization '' -serviceAccount '' -serviceAccount2 '' -serviceAccountPass '' -PostgresAccountPass '' -hostname ''
+Param(
+    [string]$serial,
+    [string]$control,
+    [string]$name,
+    [string]$organization,
+    [string]$serviceAccount,
+    [string]$serviceAccount2,
+    [string]$serviceAccountPass,
+    [string]$PostgresAccountPass,
+    [string]$hostname
+)
 
 $date = Get-Date -format "yyyyMMddHHmm"
 
