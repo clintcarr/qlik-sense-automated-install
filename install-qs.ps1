@@ -11,8 +11,7 @@ $serial = ''
 $control = ''
 $name = ''
 $organization = ''
-$serviceAccount = 'domain\user'
-$serviceAccount2 = 'domain/user'
+$serviceAccount = 'user@domain.domain'
 $serviceAccountPass = '' 
 $PostgresAccountPass = ''
 $hostname = 'FQDN'
@@ -44,7 +43,7 @@ Import-Module Qlik-Cli.psm1
 "$date Imported qlik-cli to PowerShell Modules" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Adding service account user to local administrators group"
-([ADSI]"WinNT://$hostname/administrators,group").psbase.Invoke("Add",([ADSI]"WinNT://$serviceAccount2").path)
+([ADSI]"WinNT://$hostname/administrators,group").psbase.Invoke("Add",([ADSI]"WinNT://$serviceAccount").path)
 "$date Added $serviceAccount2 to local administrators group" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Installing Qlik Sense Enterprise"
