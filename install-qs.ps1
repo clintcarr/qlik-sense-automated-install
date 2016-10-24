@@ -50,8 +50,17 @@ Write-Host "Installing Qlik Sense Enterprise"
 Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-write-host "Wait 60 seconds for Qlik Sense to initialise"
-Start-Sleep -s 60
+#Code by Leigh Kennedy Qlik
+$statusCode = 0
+while ($StatusCode -ne 200) {
+  write-host "StatusCode is " $StatusCode
+  start-Sleep -s 5
+  try { $statusCode = (invoke-webrequest  https://$hostname/qps/user).statusCode }
+Catch { 
+    write-host "Server down, waiting 5 seconds"
+    start-Sleep -s 5
+    }
+}
 
 Write-Host "Connecting to Qlik Sense Repository Service"
 Connect-Qlik $hostname -UseDefaultCredentials
