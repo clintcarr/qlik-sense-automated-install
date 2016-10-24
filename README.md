@@ -1,6 +1,7 @@
 # qlik-sense-automated-install
 Installation of Qlik Sense via Powershell
 
+## install-qs.ps1
 This script installs Qlik Sense 3.1.1 with the following:
 
 1. Qlik Sense 3.1.1 downloaded to local directory
@@ -30,6 +31,9 @@ install-qs.ps1 -serial '' -control '' -name '' -organization '' -serviceAccount 
 
 ### Usage Example
 install-qs.ps1 -serial '883213213' -control '32134' -name 'Qlik' -organization 'Qlik' -serviceAccount 'QS1\Qservice' -serviceAccount2 'QS1/Qservice' -serviceAccountPass 'Pass@word1' -PostgresAccountPass 'Pass@word1' -hostname 'QS1'
+
+## dl_install_qlikcli.ps1
+This script downloads and installs Qlik-CLI.
 
 # License
 
