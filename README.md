@@ -3,9 +3,12 @@ Installation of Qlik Sense via Powershell
 
 This script installs Qlik Sense 3.1.1 with the following:
 
-1. Central Node
-2. Domain account as Service Account
-3. PostgresDB password on
+1. Qlik Sense 3.1.1 downloaded to local directory
+2. Qlik-CLI downloaded to local directory
+3. Qlik-CLI installed into PowerShell Modules
+4. Service Account added to local administrators group
+5. Qlik Sense 3.1.1 installed as a Central Node
+6. Qlik Sense licensed
 
 Utilises Qlik-CLI (https://github.com/ahaydon/Qlik-Cli) to perform license step.
 
