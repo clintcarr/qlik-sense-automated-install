@@ -35,6 +35,10 @@ install-qs.ps1 -serial '883213213' -control '32134' -name 'Qlik' -organization '
 ## dl_install_qlikcli.ps1
 This script downloads and installs Qlik-CLI.
 
+# Acknowledgements
+Adam Haydon
+Leigh Kennedy
+
 # License
 
 This software is made available "AS IS" without warranty of any kind. Qlik support agreement does not cover support for this script.
