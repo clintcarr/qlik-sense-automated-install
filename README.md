@@ -1,4 +1,4 @@
-# qlik-sense-automated-install
+ # qlik-sense-automated-install
 Installation of Qlik Sense via Powershell
 
 ## install-qs.ps1
@@ -36,8 +36,9 @@ install-qs.ps1 -serial '883213213' -control '32134' -name 'Qlik' -organization '
 This script downloads and installs Qlik-CLI.
 
 # Acknowledgements
-Adam Haydon
-Leigh Kennedy
+Adam Haydon (https://github.com/ahaydon/Qlik-Cli)
+
+Leigh Kennedy (Heartbeat of QPS code)
 
 # License
 
