@@ -16,6 +16,9 @@ Utilises Qlik-CLI (https://github.com/ahaydon/Qlik-Cli) to perform license step.
 ## User Account
 Note: Does not create the service account, please create within Domain or Local system before running.
 
+## Postgres
+Note: If running non-interactively the installation may fail due to Postgres needing to write to a location that doesn't yet exist.  In order to resolve this consider creating an environment variable (PGPASSWORD) with the password of the Super User.  This is commented out in the code. (https://www.postgresql.org/docs/9.3/static/libpq-envars.html)
+
 ## Usage
 install-qs.ps1 -serial '' -control '' -name '' -organization '' -serviceAccount '' -serviceAccount2 '' -serviceAccountPass '' -PostgresAccountPass '' -hostname ''
 
