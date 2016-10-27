@@ -5,6 +5,7 @@
 
 # usage install-qs.ps1 serial='' control='' name='' organization='' serviceAccount='' serviceAccount2='' PostgresAccountPass='' hostname=''
 
+
 Param(
     [string]$serial,
     [string]$control,
@@ -16,6 +17,10 @@ Param(
     [string]$PostgresAccountPass,
     [string]$hostname
 )
+$EncodedText = "UQBsADEAawBTADMAbgBzAGUAQAAyADAAMQA2AA=="
+$DecodedText = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($EncodedText))
+
+[Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
 
 $date = Get-Date -format "yyyyMMddHHmm"
 
@@ -70,3 +75,5 @@ Connect-Qlik $hostname -UseDefaultCredentials
 Write-Host "Setting license"
 Set-QlikLicense -serial $serial -control $control -name $name -organization $organization
 "$date Written license: $serial" | Out-File -filepath C:\installation\qsInstallLog.txt -append
+
+[Environment]::SetEnvironmentVariable("PGPASSWORD", "$null", "Machine")
