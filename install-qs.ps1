@@ -17,8 +17,6 @@ Param(
     [string]$PostgresAccountPass,
     [string]$hostname
 )
-$EncodedText = "UQBsADEAawBTADMAbgBzAGUAQAAyADAAMQA2AA=="
-$DecodedText = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($EncodedText))
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
 
