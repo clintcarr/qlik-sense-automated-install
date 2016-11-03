@@ -16,3 +16,4 @@ Write-Host "Changing RunOnce script."
 $RunOnceKey = "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce"
 set-itemproperty $RunOnceKey "NextRun" ('C:\Windows\System32\WindowsPowerShell\v1.0\Powershell.exe -executionPolicy Unrestricted -File ' + "C:\Installation\qlik-sense-automated-install-master\install-qs-ps5.ps1")
 
+shutdown -t 0 -r -f
