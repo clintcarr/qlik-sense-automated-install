@@ -1,4 +1,6 @@
 New-Item -ItemType directory -Path C:\installation\ -force
+
+write-host "Enter password for Service Account: "
 $Password = Read-Host -AsSecureString
 New-LocalUser "Qservice" -Password $Password -FullName "Qlik Service Account"
 
