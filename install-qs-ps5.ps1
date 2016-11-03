@@ -3,9 +3,6 @@
 # Date: 24 October 2016
 # Note: Requires .NET Framework 4.5.2 or higher to use
 
-# usage install-qs.ps1 serial '' control '' name '' organization '' serviceAccount '' serviceAccount2 '' serviceAccountPass '' PostgresAccountPass '' hostname ''
-
-
 Param(
     [string]$serial,
     [string]$control,
