@@ -1,4 +1,4 @@
- # qlik-sense-automated-install
+# qlik-sense-automated-install
 Installation of Qlik Sense via Powershell
 
 ## install-qs.ps1
