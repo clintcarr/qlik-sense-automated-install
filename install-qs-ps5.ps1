@@ -39,13 +39,6 @@ $destination = "c:\installation\qlik-cli\qlik-cli.zip"
 Invoke-WebRequest $source -OutFile $destination
 "$date Downloaded qlik-cli.zip" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-
-#$shell = New-Object -ComObject shell.application
-#$zip = $shell.NameSpace("C:\installation\qlik-cli\qlik-cli.zip")
-#foreach ($item in $zip.items()) {
-#  $shell.Namespace("c:\installation\qlik-cli").CopyHere($item)
-#}
-# PowerShell5.0
 Expand-Archive C:\installation\qlik-cli\qlik-cli.zip -dest C:\installation\qlik-cli
 "$date Unzipped qlik-cli" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
