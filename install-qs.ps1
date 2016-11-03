@@ -18,8 +18,10 @@ Param(
     [string]$hostname
 )
 
-[Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
 
+
+[Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
+$compname=(Get-WmiObject win32_computersystem).DNSHostName
 $date = Get-Date -format "yyyyMMddHHmm"
 
 New-Item -ItemType directory -Path C:\installation\qlik-cli -force
