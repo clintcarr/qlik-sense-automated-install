@@ -38,7 +38,7 @@ $destination = "c:\installation\qlik-cli\qlik-cli.zip"
 Invoke-WebRequest $source -OutFile $destination
 "$date Downloaded qlik-cli.zip" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-if ($PSVersionTable.PSVersion.Major -gt 5)
+if ($PSVersionTable.PSVersion.Major -ge 5)
 {
 Expand-Archive C:\installation\qlik-cli\qlik-cli.zip -dest C:\installation\qlik-cli
 }
