@@ -3,9 +3,6 @@
 # Date: 24 October 2016
 # Note: Requires .NET Framework 4.5.2 or higher to use
 
-# usage install-qs.ps1 serial '' control '' name '' organization '' serviceAccount '' serviceAccount2 '' serviceAccountPass '' PostgresAccountPass '' hostname ''
-
-
 Param(
     [string]$serial,
     [string]$control,
@@ -18,10 +15,15 @@ Param(
     [string]$hostname
 )
 
-
-
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
-$compname=(Get-WmiObject win32_computersystem).DNSHostName
+if ((Get-WmiObject win32_computersystem).Domain -eq 'WORKGROUP')
+{
+$hostname = (Get-WmiObject win32_computersystem).DNSHostName
+}
+else
+{
+$hostname = (Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
+}
 $date = Get-Date -format "yyyyMMddHHmm"
 
 New-Item -ItemType directory -Path C:\installation\qlik-cli -force
@@ -36,11 +38,19 @@ $destination = "c:\installation\qlik-cli\qlik-cli.zip"
 Invoke-WebRequest $source -OutFile $destination
 "$date Downloaded qlik-cli.zip" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
+if ($PSVersionTable.PSVersion.Major -gt 5)
+{
+Expand-Archive C:\installation\qlik-cli\qlik-cli.zip -dest C:\installation\qlik-cli
+}
+else
+{
 $shell = New-Object -ComObject shell.application
 $zip = $shell.NameSpace("C:\installation\qlik-cli\qlik-cli.zip")
 foreach ($item in $zip.items()) {
   $shell.Namespace("c:\installation\qlik-cli").CopyHere($item)
 }
+}
+
 "$date Unzipped qlik-cli" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 New-Item -ItemType directory -Path C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Qlik-Cli -force
