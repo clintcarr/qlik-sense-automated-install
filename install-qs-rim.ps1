@@ -4,7 +4,6 @@
 # Note: Requires .NET Framework 4.5.2 or higher to use
 
 Param(
-    [string][ValidateNotNull()]$centralnode,
     [string][ValidateNotNull()]$serviceAccount,
     [string][ValidateNotNull()]$serviceAccount2,
     [string][ValidateNotNull()]$serviceAccountPass,
@@ -22,8 +21,7 @@ $date = Get-Date -format "yyyyMMddHHmm"
 New-Item -ItemType directory -Path C:\installation\qlik-cli -force
 "$date Created path: c:\installation\qlik-cli" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 $source = "https://da3hntz84uekx.cloudfront.net/QlikSense/3.1.1/1/_MSI/Qlik_Sense_setup.exe"
-$destination = "c:\installation\Qlik_Sense_setup.exe"
-Invoke-WebRequest $source -OutFile $destination
+$destination = "c:\installation\Qlik_Sense_setup.exe"Invoke-WebRequest $source -OutFile $destination
 "$date Downloaded Qlik_Sense_setup.exe" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 $source = "https://github.com/ahaydon/Qlik-Cli/archive/master.zip"
@@ -56,30 +54,17 @@ Write-Host "Adding service account user to local administrators group"
 "$date Added $serviceAccount2 to local administrators group" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Installing Qlik Sense Enterprise"
-Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s rimnode=1 rimnodetype="ProxyEngine" dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
+Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s rimnode=1 rimnodetype=ProxyEngine dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Opening TCP: 443, 4244, 4444, 4241, 4242"
-New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244, 4444, 4241, 4242 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort  443, 4244, 4444, 4241, 4242 -Protocol TCP -Action Allow
 "$date Opened TCP 443, 4244, 4444, 4241, 4242" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
+#Write-Host "Connecting to Qlik Sense Repository Service"
+#Connect-Qlik $centralnode
+#"$date Connected to $centralnode" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-write-host "Connecting to Qlik Sense Proxy"
-$statusCode = 0
-while ($StatusCode -ne 200) {
-  write-host "StatusCode is " $StatusCode
-  start-Sleep -s 5
-  try { $statusCode = (invoke-webrequest  https://$hostname/qps/user -usebasicParsing).statusCode }
-Catch { 
-    write-host "Server down, waiting 5 seconds"
-    start-Sleep -s 5
-    }
-}
-
-Write-Host "Connecting to Qlik Sense Repository Service"
-Connect-Qlik $centralnode -UseDefaultCredentials
-"$date Connected to $centralnode" | Out-File -filepath C:\installation\qsInstallLog.txt -append
-
-Register-QlikNode -hostname $hostname -name $hostname -nodePurpose "Production" -engineEnabled -proxyEnabled
+#Register-QlikNode -hostname $hostname -name $hostname -nodePurpose "Production" -engineEnabled -proxyEnabled
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$null", "Machine")
