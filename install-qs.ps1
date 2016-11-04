@@ -66,12 +66,17 @@ Write-Host "Installing Qlik Sense Enterprise"
 Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
+Write-Host "Opening TCP: 443, 4244"
+New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244 -Protocol TCP -Action Allow
+"$date Opened TCP 443, 4244" | Out-File -filepath C:\installation\qsInstallLog.txt -append
+
+
 write-host "Connecting to Qlik Sense Proxy"
 $statusCode = 0
 while ($StatusCode -ne 200) {
   write-host "StatusCode is " $StatusCode
   start-Sleep -s 5
-  try { $statusCode = (invoke-webrequest  https://$hostname/qps/user).statusCode }
+  try { $statusCode = (invoke-webrequest  https://$hostname/qps/user -usebasicParsing).statusCode }
 Catch { 
     write-host "Server down, waiting 5 seconds"
     start-Sleep -s 5
