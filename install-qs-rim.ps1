@@ -13,8 +13,9 @@ Param(
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
 
-$hostfile = "c:\Windows\System32\drivers\etc\hosts" 
-"192.168.184.153`t$centralnode" | Out-File $hostfile -encoding ASCII -append 
+# In a domain DNS handles this
+#$hostfile = "c:\Windows\System32\drivers\etc\hosts" 
+#"192.168.184.153`t$centralnode" | Out-File $hostfile -encoding ASCII -append 
 
 $date = Get-Date -format "yyyyMMddHHmm"
 
