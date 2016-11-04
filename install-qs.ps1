@@ -16,14 +16,14 @@ Param(
 )
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
-if ((Get-WmiObject win32_computersystem).Domain -eq 'WORKGROUP')
-{
-$hostname = (Get-WmiObject win32_computersystem).DNSHostName
-}
-else
-{
-$hostname = (Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
-}
+#if ((Get-WmiObject win32_computersystem).Domain -eq 'WORKGROUP')
+#{
+#$hostname = (Get-WmiObject win32_computersystem).DNSHostName
+#}
+#else
+#{
+#$hostname = (Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
+#}
 $date = Get-Date -format "yyyyMMddHHmm"
 
 New-Item -ItemType directory -Path C:\installation\qlik-cli -force
