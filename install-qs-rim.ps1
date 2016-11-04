@@ -59,9 +59,9 @@ Write-Host "Installing Qlik Sense Enterprise"
 Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s rimnode=1 rimnodetype="ProxyEngine" dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-Write-Host "Opening TCP: 443, 4244, 4444"
-New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244, 4444 -Protocol TCP -Action Allow
-"$date Opened TCP 443, 4244, 4444" | Out-File -filepath C:\installation\qsInstallLog.txt -append
+Write-Host "Opening TCP: 443, 4244, 4444, 4241, 4242"
+New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244, 4444, 4241, 4242 -Protocol TCP -Action Allow
+"$date Opened TCP 443, 4244, 4444, 4241, 4242" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 
 write-host "Connecting to Qlik Sense Proxy"
