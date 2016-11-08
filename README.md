@@ -3,9 +3,8 @@ Installation of Qlik Sense via Powershell
 
 
 ## Pre-reqs
-1. Service Account created (not an admin)
-2. Unrestricted Execution Policy
-3. Internet Access
+1. Unrestricted Execution Policy
+2. Internet Access
 
 ## install-qs.ps1
 This script installs Qlik Sense 3.1.1 with the following:
