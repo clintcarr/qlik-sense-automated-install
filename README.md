@@ -20,15 +20,16 @@ This script installs Qlik Sense 3.1.1 with the following:
 Utilises Qlik-CLI (https://github.com/ahaydon/Qlik-Cli) to perform license step.
 
 ## User Account
-Note: Does not create the service account, please create within Domain or Local system before running.
+Note: If you set the config file to createuser = 1 a user will be created.  Local only
 
 ## Postgres
 Note: If running non-interactively the installation may fail due to Postgres needing to write to a location that doesn't yet exist.  In order to resolve this consider creating an environment variable (PGPASSWORD) with the password of the Super User.  This is commented out in the code. (https://www.postgresql.org/docs/9.3/static/libpq-envars.html)
 
 ## Usage
-0. Launch Powershell
-1. Execute: Set-ExecutionPolicy Unrestricted
-2. Execute the following code (line by line or enter into a local PS script and execute):
+0. Edit the config file C:\installation\qlik-sense-automated-install-master\install-qs-cfg.xml with your config
+1. Launch Powershell
+2. Execute: Set-ExecutionPolicy Unrestricted
+3. Execute the following code (line by line or enter into a local PS script and execute):
 
   New-Item -ItemType directory -Path C:\installation\ -force
   
@@ -40,8 +41,8 @@ Note: If running non-interactively the installation may fail due to Postgres nee
   
   Expand-Archive c:\installation\master.zip -dest c:\installation\
   
-3. using Powershell enter c:\installation\qlik-sense-automated-install-master\ 
-4. Execute: install-qs.ps1 path to configuration file
+4. using Powershell enter c:\installation\qlik-sense-automated-install-master\ 
+5. Execute: .\install-qs.ps1 path .\install-qs-cfg.xml
 
 ### Usage Example
 install-qs.ps1 c:\installation\install-qs-cfg.xml
