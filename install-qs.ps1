@@ -86,7 +86,7 @@ else
   New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244, 4899, 4241, 4242, 4900 -Protocol TCP -Action Allow
   "$date Opened TCP 443, 4244, 4899, 4241, 4242, 4900" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 }
-}
+
 
 write-host "Connecting to Qlik Sense Proxy"
 $statusCode = 0
