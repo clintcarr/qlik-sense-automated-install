@@ -26,7 +26,7 @@ Note: If running non-interactively the installation may fail due to Postgres nee
 
 ## Usage
 0. Edit the config file C:\installation\qlik-sense-automated-install-master\install-qs-cfg.xml with your config
-1. Launch Powershell
+1. Launch Powershell (As administrator)
 2. Execute: Set-ExecutionPolicy Unrestricted
 3. Execute the following code (line by line or enter into a local PS script and execute):
 
