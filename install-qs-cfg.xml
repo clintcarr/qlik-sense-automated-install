@@ -8,5 +8,6 @@
    <PostgresAccountPass>Qlik1234</PostgresAccountPass>
    <hostname>surfacecc</hostname>
    <singleserver>1</singleserver>
+   <createuser>1</createuser>
 </config>
 
