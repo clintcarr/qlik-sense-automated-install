@@ -19,6 +19,7 @@ $name = $ConfigXML.config.name
 $organization = $ConfigXML.config.organization
 $serviceAccount = $ConfigXML.config.serviceAccount
 $PostgresAccountPass = $ConfigXML.config.PostgresAccountPass
+$serviceAccountPass = $ConfigXML.config.serviceAccountPass
 $hostname = $ConfigXML.config.hostname
 $singleserver = $ConfigXML.config.singleserver
 
