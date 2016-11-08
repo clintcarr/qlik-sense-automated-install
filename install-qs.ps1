@@ -1,6 +1,6 @@
 # Title: Qlik Sense 3.1 Automated Installer
 # Author: Clint Carr
-# Date: 24 October 2016
+# Date: 8 November 2016
 # Note: Requires .NET Framework 4.5.2 or higher to use
 
 param(
