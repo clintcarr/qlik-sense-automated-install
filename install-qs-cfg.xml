@@ -1,0 +1,12 @@
+<config>
+   <serial>123456</serial>
+   <control>23456</control>
+   <name>abcdefg</name>
+   <organization>Qlik</organization>
+   <serviceAccount>abcde</serviceAccount>
+   <serviceAccountPass>Qlik1234</serviceAccountPass>
+   <PostgresAccountPass>Qlik1234</PostgresAccountPass>
+   <hostname>surfacecc</hostname>
+   <singleserver>1</singleserver>
+</config>
+
