@@ -30,10 +30,15 @@ Note: If running non-interactively the installation may fail due to Postgres nee
 1. Execute: Set-ExecutionPolicy Unrestricted
 2. Execute the following code (line by line or enter into a local PS script and execute):
   New-Item -ItemType directory -Path C:\installation\ -force
+  
   $source = 'https://github.com/clintcarr/qlik-sense-automated-install/archive/master.zip'
+  
   $destination = 'c:\installation\master.zip'
+  
   Invoke-WebRequest $source -OutFile $destination
+  
   Expand-Archive c:\installation\master.zip -dest c:\installation\
+  
 3. using Powershell enter c:\installation\qlik-sense-automated-install-master\ 
 4. Execute: install-qs.ps1 path to configuration file
 
