@@ -26,7 +26,16 @@ Note: Does not create the service account, please create within Domain or Local 
 Note: If running non-interactively the installation may fail due to Postgres needing to write to a location that doesn't yet exist.  In order to resolve this consider creating an environment variable (PGPASSWORD) with the password of the Super User.  This is commented out in the code. (https://www.postgresql.org/docs/9.3/static/libpq-envars.html)
 
 ## Usage
-install-qs.ps1 path to configuration file
+0. Launch Powershell
+1. Execute: Set-ExecutionPolicy Unrestricted
+2. Execute the following code (line by line or enter into a local PS script and execute):
+  New-Item -ItemType directory -Path C:\installation\ -force
+  $source = 'https://github.com/clintcarr/qlik-sense-automated-install/archive/master.zip'
+  $destination = 'c:\installation\master.zip'
+  Invoke-WebRequest $source -OutFile $destination
+  Expand-Archive c:\installation\master.zip -dest c:\installation\
+3. using Powershell enter c:\installation\qlik-sense-automated-install-master\ 
+4. Execute: install-qs.ps1 path to configuration file
 
 ### Usage Example
 install-qs.ps1 c:\installation\install-qs-cfg.xml
