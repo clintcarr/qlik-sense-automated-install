@@ -3,17 +3,24 @@
 # Date: 24 October 2016
 # Note: Requires .NET Framework 4.5.2 or higher to use
 
-Param(
-    [string]$serial,
-    [string]$control,
-    [string]$name,
-    [string]$organization,
-    [string]$serviceAccount,
-    [string]$serviceAccount2,
-    [string]$serviceAccountPass,
-    [string]$PostgresAccountPass,
-    [string]$hostname
+param(
+    [Parameter(Mandatory=$True, HelpMessage="Enter the full path to the configuration file.")] [string]$ConfigFilePath=".\install-qs-cfg.xml"
 )
+
+If(-not(Test-Path $ConfigFilePath)){
+    Write-Error "Could not find script configuration file at $($ConfigFilePath)." -ErrorAction Stop
+}
+ 
+[xml]$ConfigXML = Get-Content $ConfigFilePath
+
+$serial = $ConfigXML.config.serial
+$control = $ConfigXML.config.control
+$name = $ConfigXML.config.name
+$organization = $ConfigXML.config.organization
+$serviceAccount = $ConfigXML.config.serviceAccount
+$PostgresAccountPass = $ConfigXML.config.PostgresAccountPass
+$hostname = $ConfigXML.config.hostname
+$singleserver = $ConfigXML.config.singleserver
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
 #if ((Get-WmiObject win32_computersystem).Domain -eq 'WORKGROUP')
@@ -41,14 +48,14 @@ Invoke-WebRequest $source -OutFile $destination
 
 if ($PSVersionTable.PSVersion.Major -ge 5)
 {
-Expand-Archive C:\installation\qlik-cli\qlik-cli.zip -dest C:\installation\qlik-cli
+  Expand-Archive C:\installation\qlik-cli\qlik-cli.zip -dest C:\installation\qlik-cli
 }
 else
 {
-$shell = New-Object -ComObject shell.application
-$zip = $shell.NameSpace("C:\installation\qlik-cli\qlik-cli.zip")
-foreach ($item in $zip.items()) {
-  $shell.Namespace("c:\installation\qlik-cli").CopyHere($item)
+  $shell = New-Object -ComObject shell.application
+  $zip = $shell.NameSpace("C:\installation\qlik-cli\qlik-cli.zip")
+  foreach ($item in $zip.items()) {
+    $shell.Namespace("c:\installation\qlik-cli").CopyHere($item)
 }
 }
 
@@ -60,19 +67,26 @@ Import-Module Qlik-Cli.psm1
 "$date Imported qlik-cli to PowerShell Modules" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Adding service account user to local administrators group"
-([ADSI]"WinNT://$hostname/administrators,group").psbase.Invoke("Add",([ADSI]"WinNT://$serviceAccount2").path)
-"$date Added $serviceAccount2 to local administrators group" | Out-File -filepath C:\installation\qsInstallLog.txt -append
+([ADSI]"WinNT://$hostname/administrators,group").psbase.Invoke("Add",([ADSI]"WinNT://$hostname/$serviceAccount").path)
+"$date Added $hostname\$serviceAccount to local administrators group" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Installing Qlik Sense Enterprise"
-Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
+Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$hostname\$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
-Write-Host "Opening TCP: 443, 4244"
-New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244 -Protocol TCP -Action Allow
-#Multi-node rules
-#New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244, 4899, 4241, 4242, 4900 -Protocol TCP -Action Allow
-"$date Opened TCP 443, 4244" | Out-File -filepath C:\installation\qsInstallLog.txt -append
-
+if ($singleserver -eq 1)
+{
+  Write-Host "Opening TCP: 443, 4244"
+  New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244 -Protocol TCP -Action Allow
+  "$date Opened TCP 443, 4244" | Out-File -filepath C:\installation\qsInstallLog.txt -appen
+}
+else
+{
+  Write-Host "Opening TCP: 443, 4244, 4899, 4241, 4242, 4900"
+  New-NetFirewallRule -DisplayName "Qlik Sense" -Direction Inbound -LocalPort 443, 4244, 4899, 4241, 4242, 4900 -Protocol TCP -Action Allow
+  "$date Opened TCP 443, 4244, 4899, 4241, 4242, 4900" | Out-File -filepath C:\installation\qsInstallLog.txt -append
+}
+}
 
 write-host "Connecting to Qlik Sense Proxy"
 $statusCode = 0
