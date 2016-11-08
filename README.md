@@ -26,20 +26,24 @@ Note: Does not create the service account, please create within Domain or Local 
 Note: If running non-interactively the installation may fail due to Postgres needing to write to a location that doesn't yet exist.  In order to resolve this consider creating an environment variable (PGPASSWORD) with the password of the Super User.  This is commented out in the code. (https://www.postgresql.org/docs/9.3/static/libpq-envars.html)
 
 ## Usage
-install-qs.ps1 -serial '' -control '' -name '' -organization '' -serviceAccount '' -serviceAccount2 '' -serviceAccountPass '' -PostgresAccountPass '' -hostname ''
+install-qs.ps1 -<path to configuration file>
 
-### Parameter Examples
-1. Serial = Qlik Sense serial number
-2. Control = Qlik Sense control number
-3. name = Name of licensee
-4. organization = Organization of licensee
-5. serviceaccount = service account to run Qlik services (computername\username) or (domain\username)
-6. serviceaccount2 = service account to run Qlik services (computername/username) or (domain/username)
-7. serviceaccountpass = password of service account
-8. postgresAccountPass = password for postgres super user
+### Configuration file example
+<config>
+   <serial>123456</serial>
+   <control>23456</control>
+   <name>abcdefg</name>
+   <organization>Qlik</organization>
+   <serviceAccount>abcde</serviceAccount>
+   <serviceAccountPass>Qlik1234</serviceAccountPass>
+   <PostgresAccountPass>Qlik1234</PostgresAccountPass>
+   <hostname>surfacecc</hostname>
+   <singleserver>1</singleserver>
+</config>
+
 
 ### Usage Example
-install-qs.ps1 -serial '883213213' -control '32134' -name 'Qlik' -organization 'Qlik' -serviceAccount 'QS1\Qservice' -serviceAccount2 'QS1/Qservice' -serviceAccountPass 'Pass@word1' -PostgresAccountPass 'Pass@word1' -hostname 'QS1'
+install-qs.ps1 c:\installation\install-qs-cfg.xml
 
 ## dl_install_qlikcli.ps1
 This script downloads and installs Qlik-CLI.
