@@ -26,9 +26,16 @@ $createuser = $ConfigXML.config.createuser
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
 
-if ($createuser -eq 1) {
-    $Password = ConvertTo-SecureString -String $serviceAccountPass -Force -AsPlainText
-    New-LocalUser $serviceAccount -Password $Password -FullName "Qlik Service Account"
+if ($PSVersionTable.PSVersion.Major -ge 5)
+{
+    if ($createuser -eq 1) {
+        $Password = ConvertTo-SecureString -String $serviceAccountPass -Force -AsPlainText
+        New-LocalUser $serviceAccount -Password $Password -FullName "Qlik Service Account"
+    }
+}
+else
+{
+net user $serviceAccount $serviceAccountPass /add /fullname:"Qlik Sense Service Account" /passwordchg:NO
 }
 
 $date = Get-Date -format "yyyyMMddHHmm"
