@@ -22,17 +22,15 @@ $PostgresAccountPass = $ConfigXML.config.PostgresAccountPass
 $serviceAccountPass = $ConfigXML.config.serviceAccountPass
 $hostname = $ConfigXML.config.hostname
 $singleserver = $ConfigXML.config.singleserver
+$createuser = $ConfigXML.config.createuser
 
 [Environment]::SetEnvironmentVariable("PGPASSWORD", "$PostgresAccountPass", "Machine")
-#if ((Get-WmiObject win32_computersystem).Domain -eq 'WORKGROUP')
-#{
-#$hostname = (Get-WmiObject win32_computersystem).DNSHostName
-#}
 
-#else
-#{
-#$hostname = (Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
-#}
+if ($createuser -eq 1) {
+    $Password = ConvertTo-SecureString -String $serviceAccountPass -Force -AsPlainText
+    New-LocalUser $serviceAccount -Password $Password -FullName "Qlik Service Account"
+}
+
 $date = Get-Date -format "yyyyMMddHHmm"
 
 New-Item -ItemType directory -Path C:\installation\qlik-cli -force
