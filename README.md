@@ -1,7 +1,6 @@
 # qlik-sense-automated-install
 Installation of Qlik Sense via Powershell
 
-
 ## Pre-reqs
 1. Unrestricted Execution Policy
 2. Internet Access
@@ -31,35 +30,24 @@ Note: If running non-interactively the installation may fail due to Postgres nee
 3. Execute the following code (line by line or enter into a local PS script and execute):
 
 ###Powershell 5
-
+```
   New-Item -ItemType directory -Path C:\installation\ -force
-  
   $source = 'https://github.com/clintcarr/qlik-sense-automated-install/archive/master.zip'
-  
   $destination = 'c:\installation\master.zip'
-  
   Invoke-WebRequest $source -OutFile $destination
-  
   Expand-Archive c:\installation\master.zip -dest c:\installation\
-  
+```  
 ###Powershell 4 or less
-
+```
   New-Item -ItemType directory -Path C:\installation\ -force
-  
   $source = 'https://github.com/clintcarr/qlik-sense-automated-install/archive/master.zip'
-  
   $destination = 'c:\installation\master.zip'
-  
   Invoke-WebRequest $source -OutFile $destination
-  
   $shell = New-Object -ComObject shell.application
-
   $zip = $shell.NameSpace("C:\installation\master.zip")
-    
   foreach ($item in $zip.items()) {
-  
   $shell.Namespace("c:\installation\").CopyHere($item)}
-  
+```  
 4. using Powershell enter c:\installation\qlik-sense-automated-install-master\ 
 5. Execute: .\install-qs.ps1 path .\install-qs-cfg.xml
 
