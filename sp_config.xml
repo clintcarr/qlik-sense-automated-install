@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<SharedPersistenceConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DbUserName>qliksenserepository</DbUserName>
+  <DbUserPassword>Qlik1234</DbUserPassword>
+  <DbHost>qs2</DbHost>
+  <DbPort>4432</DbPort>
+  <RootDir>\\qs2\QlikSP</RootDir>
+  <StaticContentRootDir>\\qs2\QlikSP\StaticContent</StaticContentRootDir>
+  <CustomDataRootDir>\\qs2\QlikSP\CustomData</CustomDataRootDir>
+  <ArchivedLogsDir>\\qs2\QlikSP\ArchivedLogs</ArchivedLogsDir>
+  <AppsDir>\\qs2\QlikSP\Apps</AppsDir>
+  <CreateCluster>true</CreateCluster>
+  <InstallLocalDb>true</InstallLocalDb>
+  <!--<JoinCluster>true</JoinCluster>-->
+</SharedPersistenceConfiguration>

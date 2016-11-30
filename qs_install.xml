@@ -1,0 +1,12 @@
+<config>
+   <serial>12234</serial>
+   <control>1234</control>
+   <name>abcdefg</name>
+   <organization>Qlik</organization>
+   <serviceAccount>qliklocal\qservice</serviceAccount>
+   <serviceAccountPass>Qlik1234</serviceAccountPass>
+   <PostgresAccountPass>Qlik1234</PostgresAccountPass>
+   <hostname>qs2.qliklocal.net</hostname>
+   <singleserver>1</singleserver>
+   <createuser>0</createuser>
+</config>
