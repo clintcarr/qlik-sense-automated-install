@@ -77,7 +77,7 @@ Write-Host "Adding service account user to local administrators group"
 "$date Added $hostname\$serviceAccount to local administrators group" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 Write-Host "Installing Qlik Sense Enterprise"
-Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$hostname\$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
+Invoke-Command -ScriptBlock {Start-Process -FilePath "c:\installation\Qlik_Sense_setup.exe" -ArgumentList "-s dbpassword=$PostgresAccountPass hostname=$hostname userwithdomain=$serviceAccount password=$serviceAccountPass" -Wait -PassThru}
 "$date Installed Qlik Sense 3.1.1" | Out-File -filepath C:\installation\qsInstallLog.txt -append
 
 if ($singleserver -eq 1)
