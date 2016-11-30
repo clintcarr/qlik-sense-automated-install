@@ -29,6 +29,15 @@ Note: If running non-interactively the installation may fail due to Postgres nee
 2. Execute: Set-ExecutionPolicy Unrestricted
 3. Execute the following code (line by line or enter into a local PS script and execute):
 
+## Qlik Sense 3.1.2 (With Shared Persistence)
+### Files
+1. qs_install_3.1.2.ps1 
+2. sp_config.xml
+3. install-qs-cfg.xml 
+
+### Note: The sp_config file contains information required for the Shared Persistence installation
+
+
 ###Powershell 5
 ```
   New-Item -ItemType directory -Path C:\installation\ -force
