@@ -37,8 +37,8 @@ Note: If running non-interactively the installation may fail due to Postgres nee
 
 ### Note: The sp_config file contains information required for the Shared Persistence installation
 
-
-###Powershell 5
+## Installation
+### Powershell 5
 ```
   New-Item -ItemType directory -Path C:\installation\ -force
   $source = 'https://github.com/clintcarr/qlik-sense-automated-install/archive/master.zip'
@@ -46,7 +46,7 @@ Note: If running non-interactively the installation may fail due to Postgres nee
   Invoke-WebRequest $source -OutFile $destination
   Expand-Archive c:\installation\master.zip -dest c:\installation\
 ```  
-###Powershell 4 or less
+### Powershell 4 or less
 ```
   New-Item -ItemType directory -Path C:\installation\ -force
   $source = 'https://github.com/clintcarr/qlik-sense-automated-install/archive/master.zip'
@@ -55,7 +55,7 @@ Note: If running non-interactively the installation may fail due to Postgres nee
   $shell = New-Object -ComObject shell.application
   $zip = $shell.NameSpace("C:\installation\master.zip")
   foreach ($item in $zip.items()) {
-  $shell.Namespace("c:\installation\").CopyHere($item)}
+   $shell.Namespace("c:\installation\").CopyHere($item)}
 ```  
 4. using Powershell enter c:\installation\qlik-sense-automated-install-master\ 
 5. Execute: .\install-qs.ps1 path .\install-qs-cfg.xml
