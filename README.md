@@ -5,6 +5,9 @@ Installation of Qlik Sense via Powershell
 1. Unrestricted Execution Policy
 2. Internet Access
 
+## qs32sr4_silent.ps1
+This file installs Qlik Sense 3.1.2 and newer using Shared Persistence.  It is recommended that this file be used, older versions should be ignored and are kept for historical reasons.
+
 ## install-qs.ps1
 This script installs Qlik Sense 3.1.1 with the following:
 
